@@ -72,8 +72,8 @@ function init() {
 	function launchRocket(e) {
 		if (
 			(e.type === 'keyup' && e.keyCode !== 32) ||
-			(e.target.id !== 'canvas') ||
-			(!instance.config.loaded)
+			(e.target.id !== 'canvas')
+			// (!instance.config.loaded)
 			) return;
 
 		let index = available.reduce((result, value, index) => (value) ? index : result, -1);
