@@ -4,7 +4,6 @@ const sketch = (p) => {
 	let fancy;
 
 	let loadedShader = false;
-	let loadedSampler = false;
 
 	// defined in setup
 	let fontSize = 0;
@@ -61,13 +60,10 @@ const sketch = (p) => {
 		output = p.createGraphics(p.width, p.height, p.WEBGL);
 		output.pixelDensity(1);
 
-		// adjust font size & explosion radius
 		setMeasurements();
 
 		Rocket.bindInstances(p, sampler);
 		Rocket.initDefaults();
-
-		console.log(touchDevice);
 	}
 
 	p.draw = () => {
@@ -79,7 +75,7 @@ const sketch = (p) => {
 			p.text('Loading ...', 0.5 * p.width, 0.5 * p.height);
 			p.pop();
 
-			if (loadedShader && loadedSampler) p.config.loaded = true;
+			if (loadedShader && sampler.loaded) p.config.loaded = true;
 			return;
 		};
 
