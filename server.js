@@ -1,10 +1,24 @@
-const app = require('express')();
-const http = require('http').Server(app);
+const express = require('express');
 
-app.get('/', function(req, res) {
-	res.sendfile('public/index.html');
-});
+const http = require('http');
+const path = require("path");
+const sock = require('socket.io');
+const port = 3000 || process.env.PORT;
 
-http.listen(3000, function() {
-	console.log('listening on *:3000');
-});
+
+const app = express();
+const server = http.createServer(app);
+const io = sock(server);
+
+app.use(express.static(path.join(__dirname, "public")));
+
+io.on('connection', (socket) => {
+	socket.on('launch', (data) => {
+		// console.log(data);
+		io.emit('data', data);
+	})
+})
+
+server.listen(port, function() {
+   console.log(`Server running at *:${port}/`);
+})

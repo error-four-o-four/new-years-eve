@@ -4,8 +4,56 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
+	<link rel="icon" href="data:;base64,=">
+	<link rel="stylesheet" href="assets/css/default.css">
+	<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-	Hello World
+	<main id="canvas-wrap">
+
+	</main>
+	<section id="config-wrap">
+		<div id="config-content">
+			<form id="config">
+				<div class="config-part">
+					<label for="random">
+						<input type="checkbox" name="random" id="check-random" checked>
+						randomize color
+					</label>
+				</div>
+				<div class="config-part">
+					<label for="hue" id="color-picker" class="disabled">
+						<input type="range" name="hue" id="range-hue" min="0" max="359" step="1" value="0" disabled>
+					</label>
+					<div id="color-preview"></div>
+				</div>
+				<div class="config-part">
+					<label for="sound">
+						<input type="checkbox" name="sound" id="check-player" checked>
+						mute
+					</label>
+				</div>
+				<div class="config-part">
+					<label for="fancy">
+						<input type="checkbox" name="fancy" id="check-shader" checked>
+						fancy graphics
+					</label>
+				</div>
+			</form>
+		</div>
+		<ul id="config-available">
+
+		</ul>
+		<div id="config-button">
+			&#8801;
+		</div>
+	</section>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js" integrity="sha512-N4kV7GkNv7QR7RX9YF/olywyIgIwNvfEe2nZtfyj73HdjCUkAfOBDbcuJ/cTaN04JKRnw1YG1wnUyNKMsNgg3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.35/Tone.js" integrity="sha512-lnXhe/3DWFLkSDEO0+Hb2ygRAR5YskNl3pIUUNaVIWmG9BiPujrfjTL7MtOlKk74V5XflNuq9jj54TaMTYoe1A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+	<script src="assets/js/rocket.js"></script>
+	<script src="assets/js/sketch.js"></script>
+	<script src="assets/js/main.js"></script>
 </body>
 </html>
