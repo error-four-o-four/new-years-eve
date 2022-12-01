@@ -4,111 +4,115 @@ const touchDevice = ('ontouchstart' in window || navigator.maxTouchPoints) ? tru
 const clickEvent = (touchDevice) ? 'touchend' : 'mouseup';
 
 const MAX_NUM = 50;
-const rockets = Array.from({ length: MAX_NUM }, () => new Rocket());
+// const rockets = Array.from({ length: MAX_NUM }, () => new Rocket());
 
 const MAX_AVAILABLE = 5;
 const TIMEOUT = 2000;
+
 let available = Array.from({ length: MAX_AVAILABLE }, () => true);
 
 let instance;
 
-document.addEventListener('DOMContentLoaded', init);
+const elements = {
+	modal: document.getElementById('modal-content'),
+	modalWrap: document.getElementById('modal-wrap'),
+	modalButton: document.getElementById('modal-button'),
+	rocketsAvailableInfo: document.getElementById('rockets-available-info'),
+};
+
+const form = document.forms['rocket-config'];
+
+for (let i = 0; i < MAX_AVAILABLE; i += 1) {
+	const elt = document.createElement('span');
+	elt.innerHTML = '&#128640;';
+	elements.rocketsAvailableInfo.appendChild(elt);
+}
+
+// set default values
+document.querySelector('label[for=range-hue]').classList.add('disabled');
+form.elements['check-random-color'].checked = true;
+form.elements['check-mute'].checked = false;
+form.elements['check-glsl'].checked = true;
 
 function init() {
-	instance = new p5(sketch, document.querySelector('#canvas-wrap'));
-
-	const elements = {
-		parent: document.querySelector('#config-wrap'),
-		button: document.querySelector('#config-button'),
-		content: document.querySelector('#config-content'),
-		available: document.querySelector('#config-available'),
-		slider: document.querySelector('#range-hue'),
-		checkRandom: document.querySelector('#check-random'),
-		checkPlayer: document.querySelector('#check-player'),
-		checkShader: document.querySelector('#check-shader'),
-	};
-
-	for (let i = 0; i < MAX_AVAILABLE; i += 1) {
-		const item = document.createElement('li');
-		item.innerHTML = '&#128640;';
-		elements.available.appendChild(item);
-	}
-
-	elements.checkRandom.checked = true;
-	elements.slider.disabled = true;
-	elements.slider.parentElement.classList.add('disabled');
-	elements.checkPlayer.checked = false;
-	elements.checkShader.checked = true;
-
-	elements.button.addEventListener(clickEvent, () => {
-		elements.content.classList.toggle('visible');
-	})
-
-	elements.checkRandom.addEventListener('change', () => {
-		elements.slider.disabled = !elements.slider.disabled;
-		elements.slider.parentElement.classList.toggle('disabled');
-		Rocket.randomize = elements.checkRandom.checked;
-		Rocket.hue = elements.slider.value;
-	})
-	elements.checkPlayer.addEventListener('change', () => {
-		instance.config.mute = elements.checkPlayer.checked;
-	})
-
-	elements.checkShader.addEventListener('change', () => {
-		instance.config.fancy = elements.checkShader.checked;
-	})
-	elements.slider.addEventListener('input', () => {
-		Rocket.hue = elements.slider.value;
-	})
-
-	window.addEventListener('keyup', launchRocket);
-	window.addEventListener(clickEvent, launchRocket);
-
-	socket.on('data', (data) => {
-		instance.launch(data);
-	})
+	// instance = new p5(sketch, document.getElementById('canvas-wrap'));
 
 
-	function launchRocket(e) {
-		if (
-			(e.type === 'keyup' && e.keyCode !== 32) ||
-			(e.target.id !== 'canvas') ||
-			(!instance.config.loaded)
-			) return;
+	// elements.checkRandom.checked = true;
+	// elements.slider.disabled = true;
+	// elements.slider.parentElement.classList.add('disabled');
+	// elements.checkPlayer.checked = false;
+	// elements.checkShader.checked = true;
 
-		let index = available.reduce((result, value, index) => (value) ? index : result, -1);
-		if (index === -1) return;
+	// elements.modalButton.addEventListener(clickEvent, () => {
+	// 	elements.modal.classList.toggle('visible');
+	// })
 
-		animateRocketIcon(index);
-		updateAvailable(index);
-		socket.emit('launch', Rocket.getLaunchValues());
-	}
-	function updateAvailable(index) {
-		available[index] = false;
-	}
+	// elements.checkRandom.addEventListener('change', () => {
+	// 	elements.slider.disabled = !elements.slider.disabled;
+	// 	elements.slider.parentElement.classList.toggle('disabled');
+	// 	Rocket.randomize = elements.checkRandom.checked;
+	// 	Rocket.hue = elements.slider.value;
+	// })
+	// elements.checkPlayer.addEventListener('change', () => {
+	// 	instance.config.mute = elements.checkPlayer.checked;
+	// })
 
-	function animateTo(elt, keyframes, options) {
-		const animation = elt.animate(
-			keyframes, {
-				...options,
-				fill: 'forwards'
-			},
-		);
-		animation.addEventListener('finish', () => {
-			animation.commitStyles();
-			animation.cancel();
-		})
-		return animation;
-	}
+	// elements.checkShader.addEventListener('change', () => {
+	// 	instance.config.fancy = elements.checkShader.checked;
+	// })
+	// elements.slider.addEventListener('input', () => {
+	// 	Rocket.hue = elements.slider.value;
+	// })
 
-	function animateRocketIcon(index) {
-		const item = elements.available.children[index];
-		const reset = () => {
-			item.style.opacity = 1;
-			available[index] = true;
-		}
-		item.style.opacity = .05;
-		animateTo(item, {opacity: 0.4}, {duration: 0.75 * TIMEOUT});
-		setTimeout(reset, TIMEOUT);
-	}
+	// window.addEventListener('keyup', launchRocket);
+	// window.addEventListener(clickEvent, launchRocket);
+
+	// socket.on('data', (data) => {
+	// 	instance.launch(data);
+	// })
+
+
+	// function launchRocket(e) {
+	// 	if (
+	// 		(e.type === 'keyup' && e.keyCode !== 32) ||
+	// 		(e.target.id !== 'canvas') ||
+	// 		(!instance.config.loaded)
+	// 		) return;
+
+	// 	let index = available.reduce((result, value, index) => (value) ? index : result, -1);
+	// 	if (index === -1) return;
+
+	// 	animateRocketIcon(index);
+	// 	updateAvailable(index);
+	// 	socket.emit('launch', Rocket.getLaunchValues());
+	// }
+	// function updateAvailable(index) {
+	// 	available[index] = false;
+	// }
+
+	// function animateTo(elt, keyframes, options) {
+	// 	const animation = elt.animate(
+	// 		keyframes, {
+	// 			...options,
+	// 			fill: 'forwards'
+	// 		},
+	// 	);
+	// 	animation.addEventListener('finish', () => {
+	// 		animation.commitStyles();
+	// 		animation.cancel();
+	// 	})
+	// 	return animation;
+	// }
+
+	// function animateRocketIcon(index) {
+	// 	const item = elements.available.children[index];
+	// 	const reset = () => {
+	// 		item.style.opacity = 1;
+	// 		available[index] = true;
+	// 	}
+	// 	item.style.opacity = .05;
+	// 	animateTo(item, {opacity: 0.4}, {duration: 0.75 * TIMEOUT});
+	// 	setTimeout(reset, TIMEOUT);
+	// }
 }

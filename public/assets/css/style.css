@@ -6,7 +6,7 @@ html, body {
 }
 
 body {
-	font-family: sans-serif;
+	font-family: Helvetica, sans-serif;
 	line-height: 1.2;
 	color: hsl(0, 0%, 70%);
 	background: linear-gradient(#000, rgb(8, 8, 51));
@@ -24,7 +24,7 @@ body {
 	position: relative;
 }
 
-#config-wrap {
+#modal-wrap {
 	position: absolute;
 	left: 0;
 	bottom: 0;
@@ -35,31 +35,23 @@ body {
 	color: #ccc;
 }
 
-#config-content {
-	padding: 1.5rem 1rem;
+#modal-content {
+	padding: 1rem 1rem 3.5rem;
 
 	background: #030303;
 	border-top: 1px solid #9c9c9c;
 
-	opacity: 0;
-	translate: 0 100%;
+	/* opacity: 0;
+	translate: 0 100%; */
 	transition: opacity .6s, translate .6s;
 }
 
-#config-content.visible {
+#modal-content.visible {
 	opacity: 1;
 	translate: 0;
 }
 
-#config-available {
-	position: absolute;
-	left: .5rem;
-	bottom: .5rem;
-
-	display: flex;
-}
-
-#config-button {
+#modal-button {
 	position: absolute;
 	right: .5rem;
 	bottom: .5rem;
@@ -67,22 +59,39 @@ body {
 	display: block;
 	width: 2.5rem;
 
-	font-size: 3rem;
+	font-size: 2.5rem;
 	font-weight: bold;
 	text-align: center;
-	line-height: 3rem;
+	line-height: 2.5rem;
 	color: #ccc;
 	cursor: pointer;
 }
 
-.config-part {
-	display: flex;
-	flex-direction: row;
-	align-items: flex-start;
+#rockets-available-info {
+	position: absolute;
+	left: .5rem;
+	bottom: .5rem;
 
-	margin: 0 0 1.5rem;
+	font-size: 1.5rem;
+	line-height: 2.5rem;
 }
 
+form {
+	display: grid;
+}
+fieldset {
+	margin: 0.5rem 0 0.5rem;
+	border: none;
+}
+label {
+	padding: 0 0 1.25rem 0;
+}
+label.disabled {
+	color:hsl(0, 0%, 35%);
+}
+
+
+/* reset appearance */
 [type=range] {
 	position: relative;
 	margin: 0;
@@ -110,12 +119,22 @@ body {
 	border-radius: .375rem;
 	overflow: hidden;
 } */
-#color-picker {
+#range-hue {
+	display: block;
+	margin: 0.25rem 0;
+
 	background: linear-gradient(90deg, red 0%, yellow 16.66%, green 33.33%, cyan 49.99%, blue 66.66%, purple 83.32%, red 100%);
-	border-radius: .375rem;
+	border-radius: .25rem;
 	border: 1px solid #9c9c9c;
 }
-#color-picker.disabled {
-	background: #666;
+
+#range-hue:disabled {
+	background:hsl(0, 0%, 10%);
+	border-color:hsl(0, 0%, 35%);
+}
+#range-hue:disabled::-webkit-slider-thumb,
+#range-hue:disabled::-moz-range-thumb {
+	background:hsl(0, 0%, 15%);
+	border-color:hsl(0, 0%, 35%);
 }
 
