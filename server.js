@@ -2,19 +2,17 @@ const express = require('express');
 
 const http = require('http');
 const path = require("path");
-const sock = require('socket.io');
+// const sock = require('socket.io');
 const port = process.env.PORT || 5500;
-
 
 const app = express();
 const server = http.createServer(app);
-const io = sock(server);
+const io = require('socket.io')(server);
 
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "client")));
 
 io.on('connection', (socket) => {
 	socket.on('launch', (data) => {
-		// console.log(data);
 		io.emit('data', data);
 	})
 })

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Happy New Year</title>
+	<link rel="icon" href="data:;base64,=">
+	<link rel="stylesheet" href="assets/css/default.css">
+	<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+	<main>
+		<div id="canvas-wrap" class="flex-center">
+			<div id="p5_loading"></div>
+
+		</div>
+		<div id="countdown-wrap" class="flex-center">
+
+		</div>
+	</main>
+	<div id="modal-wrap">
+		<div id="modal-content">
+			<form id="rocket-config">
+				<fieldset>
+					<label for="check-custom-color">
+						<input type="checkbox" id="check-custom-color" name="check-custom-color">
+						Pick a custom color
+					</label>
+					<label for="range-hue" class="disabled">
+						<input type="range" id="range-hue" name="range-hue" min="0" max="359" step="1" value="0" disabled>
+						<span id="color-preview">&nbsp;</span>
+					</label>
+				</fieldset>
+
+				<fieldset>
+					<label for="check-fancy-graphics">
+						<input type="checkbox" id="check-fancy-graphics" name="check-fancy-graphics" checked>
+						Use fancy graphics
+					</label>
+				</fieldset>
+
+				<fieldset>
+					<label for="check-mute">
+						<input type="checkbox" id="check-mute" name="check-mute">
+						Mute &#128263;
+					</label>
+				</fieldset>
+			</form>
+		</div>
+
+		<div id="rockets-available-wrap">
+			Loading ...
+		</div>
+
+		<div id="modal-button">
+			<span>&#8801;</span>
+			<!-- <span>&#9881;</span> -->
+		</div>
+	</div>
+
+	<script src="/socket.io/socket.io.js"></script>
+	<!-- <script src="./assets/lib/p5.min.js"></script> -->
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.min.js" integrity="sha512-WJXVjqeINVpi5XXJ2jn0BSCfp0y80IKrYh731gLRnkAS9TKc5KNt/OfLtu+fCueqdWniouJ1ubM+VI/hbo7POQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js" integrity="sha512-Siyxh4gyNM5SaERNa9BOZSPcu/auHyFUWn9OVFD7MxI3/dVPQklE7tfqS+pLmPHF1zo6UdDaJAp/thihrf0c7w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+	<script src="assets/js/main.js" type="module"></script>
+</body>
+</html>
