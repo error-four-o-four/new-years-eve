@@ -1,21 +1,24 @@
+import './css/default.css';
+import './css/style.css';
+
 import {
 	clickEvent
-} from './config.js';
+} from './js/config.js';
 
 import {
 	settings as sketchSettings,
 	pInstReady
-} from './sketch.js';
+} from './js/sketch.js';
 
 import {
 	settings as audioSettings,
 	audioReady
-} from './audio.js';
+} from './js/audio.js';
 
 import {
 	getRocketValues,
 	launchRocket
-} from './rockets.js';
+} from './js/rockets.js';
 
 const socket = io();
 

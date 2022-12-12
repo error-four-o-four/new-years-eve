@@ -9,7 +9,11 @@ const app = express();
 const server = http.createServer(app);
 const io = require('socket.io')(server);
 
-app.use(express.static(path.join(__dirname, "client")));
+const serve = (process.env.NODE_ENV === 'production')
+? path.join(__dirname, "client", "build")
+: path.join(__dirname, "client", "src");
+
+app.use(express.static(serve));
 
 io.on('connection', (socket) => {
 	socket.on('launch', (data) => {
@@ -18,5 +22,5 @@ io.on('connection', (socket) => {
 })
 
 server.listen(port, function() {
-   console.log(`Server running at *:${port}/`);
+	if (process.env.NODE_ENV === 'development') console.log(`Server running at *:${port}/`);
 })

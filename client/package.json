@@ -1,0 +1,19 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "bundle": "rollup -c"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "rollup": "^3.7.3",
+    "rollup-plugin-copy": "^3.4.0",
+    "rollup-plugin-esbuild-minify": "^1.0.7",
+    "rollup-plugin-import-css": "^3.1.0"
+  }
+}
