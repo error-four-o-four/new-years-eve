@@ -7,7 +7,7 @@
     "dev": "cross-env NODE_ENV=development nodemon server.js",
     "start": "cross-env NODE_ENV=production node server.js"
   },
-  "keywords": [],
+  "keywords": ["socketio", "p5js", "glsl"],
   "author": "",
   "license": "ISC",
   "dependencies": {
